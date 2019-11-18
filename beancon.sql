@@ -30,9 +30,8 @@ CREATE TABLE Events(
     Eventname TEXT NOT NULL,
     tagID VARCHAR(20) NOT NULL,
     Host VARCHAR(20) NOT NULL,
-    Date date NOT NULL,
-    Starttime time,
-    Endtime time,
+    Startdate date NOT NULL,
+    Enddate date,
     Private boolean NOT NULL,
     Description TEXT,
     FlyerURL TEXT,
@@ -48,15 +47,16 @@ insert into Events VALUEs ('004','National Coockie Day', '155qas', 'UCSD', '2020
 insert into Events VALUEs ('005','Triple Delta', '000aaa,000aaz,002las,000aps', 'DDD', '2019-11-05', NULL, NULL, false, 'alsjd aodfuh diviwe ivebf oeefbiwend ifvn qofn sdionousb odbehf ovniwuhof odfivn 0fnjh nh iu dfjv i v h', NULL, NULL);
 insert into Events VALUEs ('006','OMNIA', '000aaa,000aaf,000aps', 'poiuq023', '2020-01-01', NULL, NULL, false, 'DANCE DANCE DANCE', NULL, NULL);
 insert into Events VALUES ('007','BEACON Daily Meeting', '001dic', 'dlam002', '2019-11-10', '10:00:00',NULL, True, 'Code', 'https://github.com/Beacon-UCSD', NULL);
+insert into Events VALUES ('010','AWS RDS Test', '001dic', 'danlam01', '2019-11-11', '10:00:00', NULL, False, 'Code', 'https://github.com/Beacon-UCSD', NULL);
+
 
 CREATE TABLE PastEvents(
     EventID VARCHAR(50) NOT NULL,
     Eventname TEXT NOT NULL,
     tagID VARCHAR(20) NOT NULL,
     Host VARCHAR(20) NOT NULL,
-    Date date NOT NULL,
-    Starttime time,
-    Endtime time,
+    Startdate date NOT NULL,
+    Enddate date,
     Private boolean NOT NULL,
     Description TEXT,
     FlyerURL TEXT,
@@ -67,6 +67,7 @@ CREATE TABLE PastEvents(
 
 CREATE TABLE Users(
     UserID VARCHAR(50) NOT NULL,
+    GoogleUID VARCHAR(50) NOT NULL,
     Username VARCHAR(50) NOT NULL,
     Password VARCHAR(20) NOT NULL,
     Email VARCHAR(20) NOT NULL,
