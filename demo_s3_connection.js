@@ -1,7 +1,7 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
-const ID = 'AKIAJ5OIQS2D43QAEFMQ';
-const SECRET = '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';
+const ID = '#AKIAJ5OIQS2D43QAEFMQ#';
+const SECRET = '#F5YWzUCaNLQiH++T2lpvPWL/fU5ZQ4pz+Vr7zKwA#';
 const BUCKET = 'ucsdsocial';
 const s3 = new AWS.S3({
     accessKeyId: ID,
