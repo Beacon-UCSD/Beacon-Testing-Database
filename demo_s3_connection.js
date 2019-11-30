@@ -1,7 +1,8 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
-const ID = '#AKIAJ5OIQS2D43QAEFMQ#';
-const SECRET = '#F5YWzUCaNLQiH++T2lpvPWL/fU5ZQ4pz+Vr7zKwA#';
+const ID = 'AKIAJ5OIQS2D43QAEFMQ';
+const SECRET = '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';
+
 const BUCKET = 'ucsdsocial';
 const s3 = new AWS.S3({
     accessKeyId: ID,
@@ -16,9 +17,9 @@ const uploadFile = () => {
      if (err) throw err;
      const params = {
          Bucket: BUCKET, 
-         Key: 'testing.png', 
+         Key: 'testing_again.png', 
          ContentType: 'image/jpeg',
-         Body: JSON.stringify(data, null, 2),
+         Body: data,
          ACL:'public-read'
      };
      s3.upload(params, function(s3Err, data) {
