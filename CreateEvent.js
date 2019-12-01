@@ -36,25 +36,28 @@ class CreateEvent extends Component {
             flyerURL: '',
             Attendees: '',
             selectedFile: "",
-            objectFile: null
+            objectFile: {}
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handleEndDateChange = this.handleEndDateChange.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.fileChangedHandler = this.fileChangedHandler.bind(this);
 
         console.log("Check Date object's toString method: " + this.state.endDate);
 
     }
 
     fileChangedHandler = event => {
+        console.log(this.state.objectFile);
         console.log(event.target.files[0]);
+        let uploadPic = event.target.files[0];
+
         this.setState({
-            objectFile: event.target.files[0],
+            objectFile: uploadPic,
             selectedFile: URL.createObjectURL(event.target.files[0])
         });
-        console.log(this.state.selectedFile);
       }
 
     handleInputChange(evt){
@@ -98,26 +101,30 @@ class CreateEvent extends Component {
 
     handleCreateEvent(event){
         event.preventDefault();
+
         var reader = new FileReader();
+
+        reader.name = this.state.objectFile.name;
+
         reader.onload = function(e) {
-            console.log(e.target.result);
-            const params = {
+            var params = {
                 Bucket: BUCKET,
-                Key: "test.png",
+                //This is a quick-fix (very bad) prefferably a unique string to the event
+                Key: this.name,
                 ContentType: 'image/jpeg',
                 Body: e.target.result,
                 ACL: 'public-read'
             };
+            console.log(params);
             s3.upload(params, function(s3Err, data) {
                 if (s3Err) throw s3Err
-                console.log(`File uploaded successfully at ${data.Location}`)
+                console.log(`File uploaded successfully at ${data.Location}`);
             });
         };
+    
         reader.readAsArrayBuffer(this.state.objectFile);
-
-
-
-
+    
+        var location = "https://ucsdsocial.s3.amazonaws.com/" + this.state.objectFile.name;
 
         var body = {
             Tags: this.state.Tags,
@@ -127,12 +134,13 @@ class CreateEvent extends Component {
             Enddate: this.state.endDate.toString(),
             Private: this.state.Private,
             Description: this.state.Description,
-            FlyerURL: "",
-            Attendees: ""
+            FlyerURL: location,
+            Attendees: "",
         };
-        //pfetch.jsonPost('/api/storeEvent', body);
+
+        pfetch.jsonPost('/api/storeEvent', body);
         // go to eventfeed page
-        //this.props.history.push('/app/Eventfeed');
+        this.props.history.push('/app/Eventfeed');
     }
 
     addTag() {
@@ -245,6 +253,7 @@ class CreateEvent extends Component {
                     </label>
                     <input type="file" onChange={this.fileChangedHandler}/>
                 <input className="submit" type="submit" value="Submit" />
+                <h1>{this.state.objectFile.name}</h1>
                 <img id="testImg" src={this.state.selectedFile} width="150" height="150"/>
             </form>
             </div>
