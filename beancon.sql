@@ -70,28 +70,21 @@ CREATE TABLE PastEvents(
 insert into PastEvents VALUES ('aaa','AWS Account Test', '["daily standup"]', 'Dan Lam','dlam002@ucsd.edu', '2018-11-11 10:00:00', '2018-11-17 10:00:00', False, 'Code', 'https://github.com/Beacon-UCSD', NULL, NULL);
 
 CREATE TABLE Users(
-    UserID VARCHAR(50) NOT NULL,
+    UserID INT(10) AUTO_INCREMENT PRIMARY KEY,
     GoogleUID VARCHAR(50) NOT NULL,
     Username VARCHAR(50) NOT NULL,
-    Password VARCHAR(20) NOT NULL,
     Email VARCHAR(50) NOT NULL,
     Phone VARCHAR(20),
-    Tags VARCHAR(20) NOT NULL,
-    College TEXT,
+    Tags JSON DEFAULT NULL,
+    College VARCHAR(20),
     Major VARCHAR(50),
     Year VARCHAR(10),
     Friends TEXT,
     Hostevents TEXT,
     Notification TEXT,
-    PRIMARY KEY (UserID)
+    RegisteredTimestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-Insert into Users VALUEs ("khosla", "---","pkucsd", "BEACONPSWDUCSD", "khosla@ieng6.ucsd.edu", NULL, "cool,fun", NULL, NULL, NULL, NULL, "003", NULL);
-Insert into Users VALUEs ("UCSD", "---", "UCSD2020", "BEACONPSWD4", "ucsd@ucsd.edu", "858-858-8585", "UCSD", "UCSD", NULL, NULL , "UCSD", "004", "No Notification");
-Insert into Users VALUEs ("korkmaz", "---", "korkmaz123", "BEACONPSWD", "kk123@ucsd.edu", NULL, "cry, chill", "Sixth", "Neuroscience", "2020" , "korkmaz", "000", "You have created event Hard Hack");
-Insert into Users VALUEs ("khosla1", "---1","pkucsd1", "BEACONPSWDUCSD1", "khosla@ieng6.ucsd.edu", NULL, "chill,21+", NULL, NULL, NULL, NULL, "003", NULL);
-Insert into Users VALUEs ("UCSD1", "---1", "UCSD20201", "BEACONPSWD41", "ucsd@ucsd.edu", "858-858-8585", "951acs", "UCSD", NULL, NULL , "UCSD", "004", "No Notification");
-Insert into Users VALUEs ("korkmaz1", "---1", "korkmaz1231", "BEACONPSWD1", "kk123@ucsd.edu", NULL, "daily standup, fun", "Sixth", "Neuroscience", "2020" , "korkmaz", "000", "You have created event Hard Hack");
-Insert into Users VALUEs ("khosla2", "---2","pkucsd2", "BEACONPSWDUCSD", "khosla@ieng6.ucsd.edu", NULL, "party,21+", NULL, NULL, NULL, NULL, "003", NULL);
-Insert into Users VALUEs ("UCSD2", "---2", "UCSD20202", "BEACONPSWD4", "ucsd@ucsd.edu", "858-858-8585", "18+", "UCSD", NULL, NULL , "UCSD", "004", "No Notification");
-Insert into Users VALUEs ("korkmaz2", "---2", "korkmaz1232", "BEACONPSWD", "kk123@ucsd.edu", NULL, "cry, fun", "Sixth", "Neuroscience", "2020" , "korkmaz", "000", "You have created event Hard Hack");
+INSERT INTO Users VALUES (1, 'tester.no-token', 'Tester 1', 'tester1@ucsdsocial.club', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP);
+INSERT INTO Users VALUES (2, 'tester.no-token', 'Tester 2', 'tester2@ucsdsocial.club', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP);
+ALTER TABLE Users AUTO_INCREMENT=3;
