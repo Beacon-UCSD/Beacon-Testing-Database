@@ -40,7 +40,9 @@ class CreateEvent extends Component {
             Private: false,
             Public: true,
             FlyerURL: '',
-            Attendees: ''
+            Attendees: '',
+            selectedFile: "",
+            objectFile: {}
         };
 
         this.handleCreateEvent = this.handleCreateEvent.bind(this);
@@ -48,10 +50,22 @@ class CreateEvent extends Component {
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handleEndDateChange = this.handleEndDateChange.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.fileChangedHandler = this.fileChangedHandler.bind(this);
 
         console.log("Check Date object's toString method: " + this.state.endDate);
 
     }
+
+    fileChangedHandler = event => {
+        console.log(this.state.objectFile);
+        console.log(event.target.files[0]);
+        let uploadPic = event.target.files[0];
+
+        this.setState({
+            objectFile: uploadPic,
+            selectedFile: URL.createObjectURL(event.target.files[0])
+        });
+      }
 
     handleInputChange(evt){
         if (evt.target.name === "Private"){
@@ -154,7 +168,7 @@ class CreateEvent extends Component {
 
         reader.name = this.state.objectFile.name;
         var location = "";
-        if(reader.name === undefined || reader.name === null){
+        if(this.state.objectFile.name === undefined || this.state.objectFile.name === null){
             location = "https://ucsdsocial.s3.amazonaws.com/Default.png";
         }
         else{
@@ -190,6 +204,8 @@ class CreateEvent extends Component {
             FlyerURL: location,
             Attendees: ""
         };
+
+        console.log("creating: " + this.state.Eventname);
 
         pfetch.jsonPost('/api/storeEvent', reqParams, (json) => {
             if (!json.success) {
