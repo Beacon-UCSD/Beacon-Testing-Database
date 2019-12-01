@@ -39,7 +39,7 @@ class CreateEvent extends Component {
             endDate: new Date(Date.now()+5400000), // default end date = 30 minutes after start time
             Private: false,
             Public: true,
-            flyerURL: '',
+            FlyerURL: '',
             Attendees: ''
         };
 
@@ -154,7 +154,7 @@ class CreateEvent extends Component {
 
         reader.name = this.state.objectFile.name;
         var location = "";
-        if(render.name === undefined || render.name === null){
+        if(reader.name === undefined || reader.name === null){
             location = "https://ucsdsocial.s3.amazonaws.com/Default.png";
         }
         else{
@@ -190,6 +190,7 @@ class CreateEvent extends Component {
             FlyerURL: location,
             Attendees: ""
         };
+
         pfetch.jsonPost('/api/storeEvent', reqParams, (json) => {
             if (!json.success) {
                 console.error("Error! Could not post event.");
