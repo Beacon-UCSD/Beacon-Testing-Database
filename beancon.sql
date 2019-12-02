@@ -74,6 +74,7 @@ CREATE TABLE Users(
     GoogleUID VARCHAR(50) NOT NULL,
     Username VARCHAR(50) NOT NULL,
     Email VARCHAR(50) NOT NULL,
+    ProfileImage TEXT DEFAULT NULL,
     Phone VARCHAR(20),
     Tags JSON DEFAULT NULL,
     College VARCHAR(20),
@@ -85,6 +86,6 @@ CREATE TABLE Users(
     RegisteredTimestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO Users VALUES (1, 'tester.no-token', 'Tester 1', 'tester1@ucsdsocial.club', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP);
-INSERT INTO Users VALUES (2, 'tester.no-token', 'Tester 2', 'tester2@ucsdsocial.club', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP);
+INSERT INTO Users VALUES (1, 'tester.no-token', 'Tester 1', 'tester1@ucsdsocial.club', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP);
+INSERT INTO Users VALUES (2, 'tester.no-token', 'Tester 2', 'tester2@ucsdsocial.club', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP);
 ALTER TABLE Users AUTO_INCREMENT=3;
