@@ -4,7 +4,7 @@ var db = 'UCSDSocial';
 var connection = mysql.createConnection({
   host     : "beacon.cx82s6pkrof3.us-east-1.rds.amazonaws.com",
   user     : "root",
-  password : "Beacon110",
+  password :  "",
   port     : "3306"
 });
 
